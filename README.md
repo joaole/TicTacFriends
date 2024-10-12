@@ -1,6 +1,6 @@
 # Jogo da Velha - TicTacFriends
 
-Este projeto é um simples Jogo da Velha desenvolvido como parte da disciplina INE5646. A aplicação permite que dois jogadores se alternem para jogar em um tabuleiro de 3x3, com verificação de vitória ou empate, e a opção de reiniciar o jogo. Além disso, a aplicação conta com funcionalidades de cadastro de usuário, adição de amigos, e um sistema de ranque para acompanhar vitórias e derrotas entre amigos.
+Este projeto é um Jogo da Velha desenvolvido como parte da disciplina INE5646. A aplicação permite que dois jogadores se alternem para jogar em um tabuleiro de 3x3, com verificação de vitória ou empate, e a opção de reiniciar o jogo. Além disso, a aplicação conta com funcionalidades de cadastro de usuário, adição de amigos, e um sistema de ranque para acompanhar vitórias e derrotas entre amigos.
 
 ## Participantes
 
