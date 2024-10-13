@@ -4,6 +4,7 @@
   }
   
   .Game {
+    margin: auto;
     position: relative;
     width: 300px;
     height: 300px;

@@ -8,9 +8,9 @@ const app = express();
 app.use(express.json());
 
 // Conectar ao MongoDB
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URL)
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+  .catch(err => console.error("Error connecting to MongoDB:", err));
 
 // Rotas
 const authRoutes = require('./routes/auth');
