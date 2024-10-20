@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-      "baseUrl": "frontend/public/src"
+      "baseUrl": "src"
     },
     "include": [
-      "frontend/public/src"
+      "src"
     ]
   }

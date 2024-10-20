@@ -26,8 +26,8 @@ O Jogo da Velha é uma aplicação web desenvolvida utilizando HTML, CSS, e Java
 - **HTML**: Estrutura da aplicação.
 - **CSS**: Estilização e responsividade do jogo.
 - **JavaScript**: Lógica de funcionamento do jogo e interação entre os usuários.
-- **Back-end**: Implementação de autenticação de usuários e armazenamento de dados de amigos e ranque de partidas.
-- **Banco de Dados**: Utilização de uma base de dados (ex: MongoDB) para armazenar informações de usuários, amigos e partidas.
+- **Back-end**: Implementação de autenticação de usuários e armazenamento de dados de amigos e ranque de partidas. Tecnologias utilizadas, express, mongo db, node.js 
+- **Banco de Dados**: Utilização de uma base de dados (MongoDB) para armazenar informações de usuários, amigos e partidas.
 
 ## Como Rodar o Projeto
 
