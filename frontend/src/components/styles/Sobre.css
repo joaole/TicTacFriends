@@ -1,0 +1,29 @@
+/* Sobre.css */
+.sobre {
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+  }
+  
+  .sobre-content {
+    max-width: 60%;
+  }
+  
+  .sobre-content p {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2rem;
+    color: #000;
+    line-height: 1.5;
+  }
+  
+  .sobre-info ul {
+    list-style: none;
+    font-size: 1.2rem;
+    line-height: 2;
+    font-weight: bold;
+  }
+  
+  .sobre-info li {
+    margin-bottom: 10px;
+  }
+  

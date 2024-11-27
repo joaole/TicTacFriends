@@ -1,0 +1,126 @@
+/* User.css */
+
+.user-container {
+  width: 150px;
+  padding: 10px;
+  background-color: #f2f5f7;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: width 0.3s ease, padding 0.3s ease;
+  overflow: hidden;
+}
+
+.user-container.open {
+  width: 450px;
+  padding: 20px;
+}
+
+.user-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.user-avatar:hover {
+  transform: scale(1.1);
+}
+
+.user-info {
+  display: none;
+  flex-direction: column;
+  margin-left: 15px;
+}
+
+.user-container.open .user-info {
+  display: flex;
+}
+
+.user-info p {
+  margin: 4px 0;
+  font-size: 16px;
+}
+
+.user-info p:hover {
+  color: rgb(0, 85, 255);
+}
+
+.user-info strong {
+  font-weight: bold;
+}
+
+.edit-icon {
+  margin-left: 5px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+.edit-icon:hover {
+  color: rgb(0, 85, 255);
+}
+
+.password-button {
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+.password-button:hover {
+  color: #fff;
+  border-color: #fff;
+  background-color: #000;
+  transform: scale(1.1);
+}
+
+.toggle-icon {
+  font-size: 20px;
+  transition: transform 0.3s ease;
+}
+
+.toggle-icon:hover {
+  color: rgb(0, 85, 255);
+  transform: scale(1.3);
+}
+
+.user-container.open .toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Estilos para as opções de imagem de perfil */
+.image-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.image-option {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid transparent;
+  transition: transform 0.3s ease, border 0.3s ease;
+}
+
+.image-option:hover {
+  border: 2px solid rgb(0, 85, 255);
+  transform: scale(1.1);
+}

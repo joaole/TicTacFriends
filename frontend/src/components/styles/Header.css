@@ -1,0 +1,92 @@
+/* Estilos gerais para a barra de navegação */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f0f2f5;
+    padding: 10px 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Estilo para o logotipo */
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+  }
+  
+  .logo-tic {
+    color: #f27a2b; /* Cor laranja */
+  }
+  
+  .logo-tac {
+    color: #3bb54a; /* Cor verde */
+  }
+  
+  .logo-friends {
+    color: #2d72d9; /* Cor azul */
+  }
+  
+  /* Estilo para os links de navegação */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-links li {
+    display: inline;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 16px;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #555;
+  }
+  
+  /* Estilo para os botões de autenticação */
+  .auth-buttons {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .login-button, .register-button {
+    background-color: #b0c4de;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .login-button:hover, .register-button:hover {
+    background-color: #8aa6c3;
+  }
+  
+  .register-button {
+    background-color: #a6bde4;
+  }
+  
+  .register-button:hover {
+    background-color: #7f99c2;
+  }
+  
+  .settings-button {
+    background: none;
+    border: none;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #777;
+    transition: color 0.3s;
+    margin-left: 10px;
+  }
+  
+  .settings-button:hover {
+    color: #333;
+  }

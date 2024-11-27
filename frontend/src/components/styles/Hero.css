@@ -1,0 +1,32 @@
+/* Hero.css */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
+    background-color: #fff;
+  }
+  
+  .hero-content {
+    max-width: 50%;
+  }
+  
+  .hero h1 {
+    font-family: 'Comic Sans MS', cursive;
+    font-size: 2.5rem;
+    color: #000;
+  }
+  
+  .hero-button {
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    background-color: #fff;
+    border: 2px solid #000;
+    cursor: pointer;
+  }
+  
+  .hero-image img {
+    width: 300px;
+    height: auto;
+  }
+  
