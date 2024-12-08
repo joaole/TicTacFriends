@@ -7,6 +7,7 @@ import Register from '../components/Register'; // Componente de registro
 import User from '../components/User'; // Componente de usuário
 import TicTacToe from '../components/TicTacToe'; // Componente do jogo da velha
 import Chat from '../components/Chat'; // Componente do chat
+import ChooseOpponent from '../components/ChooseOpponent'; // Componente para escolher adversário
 import PrivateRoute from '../components/PrivateRoute'; // Componente para rotas protegidas
 
 const AppRoutes = ({ token, handleLogin, handleLogout }) => {
@@ -59,6 +60,14 @@ const AppRoutes = ({ token, handleLogin, handleLogout }) => {
         element={
           <PrivateRoute token={token}>
             <User onLogout={handleLogout} />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/choose-opponent"
+        element={
+          <PrivateRoute token={token}>
+            <ChooseOpponent />
           </PrivateRoute>
         }
       />

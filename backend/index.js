@@ -24,6 +24,8 @@ app.use(express.json());
 // Importa controladores de rota
 const authController = require('./controllers/authController');
 const userRoutes = require('./routes/userRoutes');
+const gameRoutes = require('./routes/gameRoutes');
+const challengeRoutes = require('./routes/challengeRoutes');
 
 // Conexão com o MongoDB
 const dbUser = process.env.DB_USER;
@@ -50,14 +52,40 @@ mongoose
     console.error('Erro ao conectar ao MongoDB:', error);
   });
 
+// Gerenciamento de desafios
+let challenges = {}; // Armazena desafios no formato { player1: player2 }
+
 // Configuração do Socket.io
 io.on('connection', (socket) => {
   console.log('Usuário conectado:', socket.id);
 
-  socket.on('message', (message) => {
-    io.emit('message', message); // Envia a mensagem para todos os usuários conectados
+  // Associar o socket ao usuário logado
+  socket.on('join', (username) => {
+    socket.join(username); // Cria uma sala para o usuário
+    console.log(`${username} entrou na sala ${username}`);
   });
 
+  // Gerenciar desafio entre jogadores
+  socket.on('challenge', ({ challenger, opponent }) => {
+    if (!challenges[opponent]) {
+      // Primeiro jogador desafia
+      challenges[challenger] = opponent;
+      io.to(opponent).emit('challenged', { challenger });
+      console.log(`${challenger} desafiou ${opponent}`);
+    } else if (challenges[opponent] === challenger) {
+      // Ambos confirmaram, jogo começa
+      io.to(challenger).emit('gameReady', { opponent });
+      io.to(opponent).emit('gameReady', { opponent: challenger });
+      delete challenges[opponent];
+      delete challenges[challenger];
+      console.log(`Jogo iniciado entre ${challenger} e ${opponent}`);
+    } else {
+      // Espera o segundo jogador aceitar
+      socket.emit('waiting', { message: 'Aguardando o outro jogador aceitar o desafio.' });
+    }
+  });
+
+  // Desconexão
   socket.on('disconnect', () => {
     console.log('Usuário desconectado:', socket.id);
   });
@@ -70,12 +98,11 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authController);
 app.use('/user', userRoutes);
+app.use('/game', gameRoutes);
+app.use('/api', challengeRoutes); // Incluindo as rotas de desafio
 
 // Inicializa o servidor na porta 5000
 const PORT = 5000;
 server.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
-
-const gameRoutes = require('./routes/gameRoutes');
-app.use('/game', gameRoutes);
