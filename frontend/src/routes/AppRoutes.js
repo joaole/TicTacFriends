@@ -1,7 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Hero from '../components/Hero'; // Componente público Hero
-import Sobre from '../components/Sobre'; // Componente público Sobre
 import Login from '../components/Login'; // Componente de login
 import Register from '../components/Register'; // Componente de registro
 import User from '../components/User'; // Componente de usuário
@@ -19,7 +18,6 @@ const AppRoutes = ({ token, handleLogin, handleLogout }) => {
         element={
           <>
             <Hero />
-            <Sobre />
           </>
         }
       />
