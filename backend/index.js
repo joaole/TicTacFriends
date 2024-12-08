@@ -17,8 +17,6 @@ const io = new Server(server, {
 
 // Middleware para permitir requisições de diferentes origens (CORS)
 app.use(cors());
-
-// Middleware para aceitar JSON nas requisições
 app.use(express.json());
 
 // Importa controladores de rota
@@ -61,12 +59,28 @@ io.on('connection', (socket) => {
 
   // Associar o socket ao usuário logado
   socket.on('join', (username) => {
+    if (!username) {
+      console.error('Nome de usuário ausente no evento join.');
+      return;
+    }
     socket.join(username); // Cria uma sala para o usuário
+    socket.username = username; // Associa o username ao socket
     console.log(`${username} entrou na sala ${username}`);
   });
 
   // Gerenciar desafio entre jogadores
   socket.on('challenge', ({ challenger, opponent }) => {
+    if (!challenger || !opponent) {
+      console.error('Challenger ou opponent ausentes no desafio.');
+      socket.emit('error', { message: 'Dados inválidos para desafio.' });
+      return;
+    }
+
+    if (challenger === opponent) {
+      socket.emit('error', { message: 'Você não pode desafiar a si mesmo.' });
+      return;
+    }
+
     if (!challenges[opponent]) {
       // Primeiro jogador desafia
       challenges[challenger] = opponent;
@@ -80,14 +94,25 @@ io.on('connection', (socket) => {
       delete challenges[challenger];
       console.log(`Jogo iniciado entre ${challenger} e ${opponent}`);
     } else {
-      // Espera o segundo jogador aceitar
       socket.emit('waiting', { message: 'Aguardando o outro jogador aceitar o desafio.' });
     }
   });
 
   // Desconexão
   socket.on('disconnect', () => {
-    console.log('Usuário desconectado:', socket.id);
+    console.log(`Usuário desconectado: ${socket.id}`);
+    if (socket.username) {
+      const opponent = challenges[socket.username];
+      if (opponent) {
+        // Notifica o oponente que o jogador desconectou
+        io.to(opponent).emit('opponentDisconnected', {
+          message: `${socket.username} desconectou-se.`,
+        });
+        delete challenges[opponent];
+      }
+      delete challenges[socket.username];
+      console.log(`Desafios associados ao usuário ${socket.username} foram limpos.`);
+    }
   });
 });
 
