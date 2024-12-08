@@ -40,7 +40,7 @@ const Register = () => {
         localStorage.setItem('token', data.token);
 
         // Redireciona para a página de usuário após registro
-        navigate('/home'); // Ajustado para corresponder à rota em App.js
+        navigate('/user'); // Ajustado para corresponder à rota em App.js
       } else {
         alert(data.msg);
       }

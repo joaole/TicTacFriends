@@ -25,20 +25,6 @@ const PrivateHeader = ({ onLogout }) => {
           <span className="logo-friends">Friends</span>
         </div>
       </NavLink>
-      <nav>
-        <ul className="nav-links">
-          <li>
-            <NavLink to="/home" className={({ isActive }) => (isActive ? 'active-link' : '')}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/partidas" className={({ isActive }) => (isActive ? 'active-link' : '')}>
-              Partidas
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
       <div className="auth-buttons">
         <button className="login-button" onClick={handleLogout} disabled={isLoggingOut}>
           {isLoggingOut ? 'Saindo...' : 'Logout'}

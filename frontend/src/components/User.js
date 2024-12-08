@@ -6,7 +6,6 @@ const User = () => {
   const [userData, setUserData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [profileImages, setProfileImages] = useState([]);
   const [showImageOptions, setShowImageOptions] = useState(false);
 
@@ -99,15 +98,11 @@ const User = () => {
     }
   };
 
-  const toggleOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
   if (loading) return <p>Carregando...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div className={`user-container ${isOpen ? 'open' : ''}`}>
+    <div className="user-container">
       <img 
         src={userData?.profileImage || 'https://example.com/path/to/default-avatar.png'} 
         alt="Imagem de Perfil" 
@@ -130,7 +125,7 @@ const User = () => {
           ))}
         </div>
       )}
-      {isOpen && userData && (
+      {userData && (
         <div className="user-info">
           {/* Campo de edição do Nome */}
           <p>
@@ -198,7 +193,6 @@ const User = () => {
           </p>
         </div>
       )}
-      <span className="toggle-icon" onClick={toggleOpen}>{isOpen ? '◀' : '▶'}</span>
     </div>
   );
 };

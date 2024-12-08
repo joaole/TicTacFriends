@@ -1,48 +1,56 @@
-/* User.css */
-
+/* Estilo principal para o container do usuário */
 .user-container {
-  width: 150px;
-  padding: 10px;
+  width: 50%; /* Metade da largura da tela em desktops */
+  max-width: 600px;
+  padding: 20px;
   background-color: #f2f5f7;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
+  flex-direction: column; /* Para organizar os elementos verticalmente */
   align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: width 0.3s ease, padding 0.3s ease;
-  overflow: hidden;
+  justify-content: flex-start;
+  margin: 20px auto; /* Centraliza o container horizontalmente */
+  transition: all 0.3s ease;
 }
 
-.user-container.open {
-  width: 450px;
-  padding: 20px;
+/* Estilo para dispositivos móveis */
+@media (max-width: 768px) {
+  .user-container {
+    width: 90%; /* Ocupa 90% da largura em telas menores */
+    max-width: 100%; /* Garante que ocupa toda a tela se necessário */
+    padding: 15px;
+  }
 }
 
+/* Estilo para a imagem de perfil */
 .user-avatar {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   transition: transform 0.3s ease;
+  margin-bottom: 15px;
 }
 
 .user-avatar:hover {
   transform: scale(1.1);
 }
 
+/* Estilo para as informações do usuário */
 .user-info {
-  display: none;
-  flex-direction: column;
-  margin-left: 15px;
-}
-
-.user-container.open .user-info {
+  width: 100%; /* Garante que ocupa toda a largura do container */
   display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinha o texto à esquerda */
+  margin-top: 20px;
 }
 
 .user-info p {
-  margin: 4px 0;
+  margin: 10px 0;
   font-size: 16px;
+  color: #333;
+  width: 100%; /* Garante que o texto se ajusta à largura */
+  word-wrap: break-word; /* Quebra linhas para textos longos */
 }
 
 .user-info p:hover {
@@ -53,6 +61,7 @@
   font-weight: bold;
 }
 
+/* Estilo do ícone de edição */
 .edit-icon {
   margin-left: 5px;
   font-size: 14px;
@@ -64,8 +73,9 @@
   color: rgb(0, 85, 255);
 }
 
+/* Botão de alteração de senha */
 .password-button {
-  padding: 5px 10px;
+  padding: 10px 20px;
   border: 1px solid black;
   border-radius: 5px;
   background-color: #fff;
@@ -79,35 +89,23 @@
   color: #fff;
   border-color: #fff;
   background-color: #000;
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-.toggle-icon {
-  font-size: 20px;
-  transition: transform 0.3s ease;
-}
-
-.toggle-icon:hover {
-  color: rgb(0, 85, 255);
-  transform: scale(1.3);
-}
-
-.user-container.open .toggle-icon {
-  transform: rotate(180deg);
-}
-
-/* Estilos para as opções de imagem de perfil */
+/* Estilo para as opções de imagem de perfil */
 .image-options {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 10px;
-  padding: 10px;
+  margin-top: 20px;
+  padding: 15px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   max-height: 200px;
   overflow-y: auto;
+  width: 100%; /* Ajusta para ocupar toda a largura */
+  justify-content: center; /* Centraliza as imagens */
 }
 
 .image-option {
@@ -123,4 +121,20 @@
 .image-option:hover {
   border: 2px solid rgb(0, 85, 255);
   transform: scale(1.1);
+}
+
+/* Adicionando responsividade para fontes */
+@media (max-width: 768px) {
+  .user-info p {
+    font-size: 14px; /* Reduz a fonte em telas menores */
+  }
+
+  .password-button {
+    font-size: 13px; /* Ajusta o tamanho do botão */
+  }
+
+  .image-option {
+    width: 50px;
+    height: 50px; /* Reduz o tamanho das opções de imagem */
+  }
 }
