@@ -4,9 +4,6 @@ import Hero from '../components/Hero'; // Componente público Hero
 import Login from '../components/Login'; // Componente de login
 import Register from '../components/Register'; // Componente de registro
 import User from '../components/User'; // Componente de usuário
-import TicTacToe from '../components/TicTacToe'; // Componente do jogo da velha
-import Chat from '../components/Chat'; // Componente do chat
-import ChooseOpponent from '../components/ChooseOpponent'; // Componente para escolher adversário
 import PrivateRoute from '../components/PrivateRoute'; // Componente para rotas protegidas
 
 const AppRoutes = ({ token, handleLogin, handleLogout }) => {
@@ -61,26 +58,6 @@ const AppRoutes = ({ token, handleLogin, handleLogout }) => {
           </PrivateRoute>
         }
       />
-      <Route
-        path="/choose-opponent"
-        element={
-          <PrivateRoute token={token}>
-            <ChooseOpponent />
-          </PrivateRoute>
-        }
-      />
-      <Route
-        path="/game"
-        element={
-          <PrivateRoute token={token}>
-            <div className="game-container">
-              <TicTacToe />
-              <Chat />
-            </div>
-          </PrivateRoute>
-        }
-      />
-
       {/* Rota padrão para redirecionar URLs inválidas */}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
