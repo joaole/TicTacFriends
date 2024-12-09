@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import io from 'socket.io-client';
 import './styles/User.css';
+
+const socket = io('http://localhost:5000'); // Conexão WebSocket com o servidor
 
 const User = () => {
   const [userData, setUserData] = useState(null);
@@ -9,7 +12,7 @@ const User = () => {
   const [profileImages, setProfileImages] = useState([]);
   const [showImageOptions, setShowImageOptions] = useState(false);
 
-  // Estados de edição separados
+  // Estados de edição
   const [isEditingName, setIsEditingName] = useState(false);
   const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [isEditingPassword, setIsEditingPassword] = useState(false);
@@ -18,6 +21,11 @@ const User = () => {
   const [newName, setNewName] = useState('');
   const [newEmail, setNewEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
+
+  // Estados para busca de oponentes
+  const [opponent, setOpponent] = useState('');
+  const [gameRoom, setGameRoom] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -60,6 +68,18 @@ const User = () => {
 
     fetchUserData();
     fetchProfileImages();
+
+    // Configuração do WebSocket para escutar o início do jogo
+    socket.on('startGame', ({ opponent, room }) => {
+      setOpponent(opponent);
+      setGameRoom(room);
+      alert(`Jogo iniciado! Seu oponente é ${opponent}`);
+      setIsSearching(false);
+    });
+
+    return () => {
+      socket.off('startGame');
+    };
   }, []);
 
   const handleImageSelect = async (imageUrl) => {
@@ -76,6 +96,14 @@ const User = () => {
       console.error('Erro ao atualizar imagem de perfil:', error);
     }
   };
+  socket.on('startGame', ({ opponent, room }) => {
+    console.log(`Jogo iniciado: oponente = ${opponent}, sala = ${room}`);
+    setOpponent(opponent);
+    setGameRoom(room);
+    alert(`Jogo iniciado! Seu oponente é ${opponent}`);
+    setIsSearching(false);
+  });
+  
 
   const handleUpdateField = async (field, value) => {
     const token = localStorage.getItem('token');
@@ -94,6 +122,16 @@ const User = () => {
     } catch (error) {
       console.error(`Erro ao atualizar ${field}:`, error);
     }
+  };
+
+  const handleFindGame = () => {
+    if (!userData.name) {
+      alert('Por favor, insira seu nome antes de buscar uma partida.');
+      return;
+    }
+
+    setIsSearching(true);
+    socket.emit('findGame', { username: userData.name });
   };
 
   if (loading) return <p>Carregando...</p>;
@@ -188,6 +226,21 @@ const User = () => {
             </button>
           )}
         </p>
+      </div>
+
+      {/* Funcionalidade de buscar oponente */}
+      <div className="game-section">
+        <h2>Iniciar Jogo</h2>
+        <button onClick={handleFindGame} disabled={isSearching}>
+          {isSearching ? 'Buscando oponente...' : 'Buscar Jogo'}
+        </button>
+        {opponent && (
+          <div>
+            <h3>Oponente Encontrado!</h3>
+            <p>Você está jogando contra: {opponent}</p>
+            <p>Sala: {gameRoom}</p>
+          </div>
+        )}
       </div>
     </div>
   );
