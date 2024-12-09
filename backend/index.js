@@ -2,7 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const path = require('path');
+const http = require('http');
+const initializeWebSocket = require('./socket');
 
 const app = express();
 
@@ -41,14 +42,20 @@ mongoose
 
 // Rotas da API
 app.get('/', (req, res) => {
-  res.status(200).json({ msg: 'Bem-vindo!' });
+    res.status(200).json({ msg: 'Bem-vindo!' });
 });
 
 app.use('/auth', authController);
 app.use('/user', userRoutes);
 
-// Inicializa o servidor na porta 5000
-const PORT = 5000;
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
+// Inicializa o servidor HTTP
+const PORT = process.env.PORT || 5000;
+const server = http.createServer(app);
+
+// Inicializa o WebSocket
+initializeWebSocket(server);
+
+// Inicializa o servidor
+server.listen(PORT, () => {
+    console.log(`Servidor rodando na porta ${PORT}`);
 });
