@@ -4,7 +4,12 @@ let playersQueue = []; // Lista de jogadores aguardando
 let ongoingGames = []; // Lista de jogos em andamento
 
 const initializeWebSocket = (server) => {
-  const io = new Server(server);
+  const io = new Server(server,{
+    cors: {
+      origin: true,
+      methods: ['GET', 'POST'],
+    },
+  });
 
   io.on('connection', (socket) => {
     console.log(`[CONEXÃO] Usuário conectado: ${socket.id}`);
