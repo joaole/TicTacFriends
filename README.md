@@ -5,7 +5,7 @@ Este projeto é um Jogo da Velha desenvolvido como parte da disciplina INE5646. 
 ## Participantes
 
 - **João Leonardo Filgueiras Rodrigues 22100905**
-- **Gabriel Sampaio Scherer**
+- **Gabriel Sampaio Scherer 21203403**
 - **Lucas Pasti Ferreira 22100912**
 
 ## Descrição do Projeto
